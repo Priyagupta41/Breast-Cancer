@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Breast Cancer Awareness Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #d63384;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .section {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+    }
+
+    .section div {
+      width: 150px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .section div:hover {
+      background-color: #f1c6f1;
+      transform: translateY(-5px);
+    }
+
+    .section i {
+      font-size: 3rem;
+      color: #d63384;
+      margin-bottom: 15px;
+    }
+
+    .section a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .section a:hover {
+      color: #d63384;
+    }
+
+    footer {
+      background-color: #f8d7e6;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #555;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Breast Cancer Awareness</h1>
+  </header>
+
+  <div class="container">
+    <h2>Explore Our Resources</h2>
+
+    <div class="section">
+      <!-- Awareness Button -->
+      <div>
+        <i class="fas fa-bell"></i>
+        <a href="awarenesspage.html">Awareness</a>
+      </div>
+
+      <!-- Breast Cancer Detection Button -->
+      <div>
+        <i class="fas fa-stethoscope"></i>
+        <a href="detect.html" target="_blank">Breast Cancer Detection</a>
+
+      </div>
+
+      <!-- Precaution Tips Button -->
+      <div>
+        <i class="fas fa-shield-alt"></i>
+        <a href="preventiontipspage.html">Precaution Tips</a>
+      </div>
+
+      <!-- Blogs and Posts Button (Single Button) -->
+      <div>
+        <i class="fas fa-blog"></i>
+        <a href="blogandposts.html">Blogs & Posts</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Breast Cancer Detection Project — Home Page
+  </footer>
+
+</body>
+</html>
