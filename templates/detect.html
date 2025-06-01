@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c89fa3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background:#f2e6e9; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        #result p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Image Classification</h1>
+        <form id="uploadForm">
+            <label for="fileInput">Upload an Image:</label>
+            <input type="file" id="fileInput" name="file" accept="image/*" required>
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result">
+            <img id="uploadedImage" src="" alt="Uploaded Image" style="display:none;">
+            <p id="prediction"></p>
+            <p id="stage"></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+    const fileInput = document.getElementById('fileInput');
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const resultDiv = document.getElementById('result');
+    const uploadedImage = document.getElementById('uploadedImage');
+    const predictionText = document.getElementById('prediction');
+    const stageText = document.getElementById('stage');
+
+    // Reset results
+    uploadedImage.style.display = 'none';
+    predictionText.textContent = '';
+    stageText.textContent = '';
+    console.log(formData);
+
+    try {
+        const response = await fetch('http://localhost:5000/predict', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            predictionText.textContent = `Error: ${data.error}`;
+        } else {
+            console.log("Image URL:", data.image_url);  
+            uploadedImage.src = 'http://localhost:5000/static/uploads/'+data.image_url; 
+            uploadedImage.style.display = 'block';
+            predictionText.textContent = `Prediction: ${data.class}`;
+            stageText.textContent = `Stage: ${data.stage_info}`;
+        }
+    } catch (error) {
+        console.log("Error:", error);
+        predictionText.textContent = 'An error occurred during prediction.'+error;
+        console.error("Error:", error);
+    }
+});
+
+    </script>
+</body>
+</html>
